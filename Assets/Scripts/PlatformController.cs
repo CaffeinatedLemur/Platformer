@@ -18,6 +18,7 @@ public class PlatformController : MonoBehaviour
     private bool facingRight = true;
 
     private Rigidbody2D myRB;
+    private CapsuleCollider2D myCC;
 
     private bool isGrounded;
     public Transform groundCheck;
@@ -38,7 +39,24 @@ public class PlatformController : MonoBehaviour
     void Start()
     {
         myRB = GetComponent<Rigidbody2D>();
+        myCC = GetComponent<CapsuleCollider2D>();
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        isGrounded = true;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        isGrounded = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isGrounded = false;
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -47,8 +65,14 @@ public class PlatformController : MonoBehaviour
         {
             jumps = maxJumps;
         }
-        
-        if (Input.GetKeyDown(KeyCode.Space) && jumps > 1)
+
+        if (Input.GetKeyDown(KeyCode.Space) && jumps > 0 && isGrounded)
+        {
+            myRB.velocity = Vector2.up * jumpForce;
+            //myRB.AddForce(new Vector2(0f, jumpForce));
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Space) && jumps > 1)
         {
             myRB.velocity = Vector2.up * jumpForce;
             //myRB.AddForce(new Vector2(0f, jumpForce));
@@ -65,9 +89,11 @@ public class PlatformController : MonoBehaviour
 
     }
 
+    
     private void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius /*whatIsGround*/);
+        //isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius /*whatIsGround*/);
+
 
         moveInput = Input.GetAxisRaw("Horizontal");
         //set player velocity based on input
