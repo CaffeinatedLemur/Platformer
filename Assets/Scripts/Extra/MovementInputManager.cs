@@ -21,17 +21,18 @@ public class MovementInputManager : MonoBehaviour
 	public float XMovement = 0f; //horizontal movement axis
 	public bool jump = false; //wether or not to jump
 
-	Respawn isDead; // Respawn sccript
+	//Respawn isDead; // Respawn sccript
 	public void Start()
 	{
-		isDead = gameObject.GetComponent<Respawn>(); //get the respawn script
+		//isDead = gameObject.GetComponent<Respawn>(); //get the respawn script
 
 	}
 	// Update is called once per frame
 	void Update()
-	{
-		if (!isDead.dead) //make sure the player is not dead
-		{
+	{	
+		
+		//if (!isDead.dead) //make sure the player is not dead
+		//{
 			XMovement = Input.GetAxisRaw("Horizontal") * speed; // Use defualt unity inputs to get the player's X movement input
 
 			//check if the player wants to jump
@@ -39,7 +40,7 @@ public class MovementInputManager : MonoBehaviour
 			{
 				jump = true; 
 			}
-		}
+		//}
 		
 	}
     void FixedUpdate()

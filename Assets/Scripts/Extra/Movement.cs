@@ -21,8 +21,8 @@ public class Movement : MonoBehaviour
 
 
 	// Sound manager script
-	SoundPlayonEvent sound;
-
+	// SoundPlayonEvent sound;
+	 
 	//how fast you go up and down
 	public float jumpVelocity;
 	public float fallMultiplier = 2.5f;
@@ -39,9 +39,9 @@ public class Movement : MonoBehaviour
 		// Sets game object of sound source to find script on it
 		GameObject soundSource = GameObject.Find("Sound Source");
 		// Uses script from sound source object and sets it for use
-		sound = soundSource.GetComponent<SoundPlayonEvent>();
+		//sound = soundSource.GetComponent<SoundPlayonEvent>();
 
-		isDead = gameObject.GetComponent<Respawn>(); //get the respawn script
+		//isDead = gameObject.GetComponent<Respawn>(); //get the respawn script
 
 	}
 
@@ -71,7 +71,7 @@ public class Movement : MonoBehaviour
 
 			//myRb.velocity = Vector2.up * Physics2D.gravity.y * (jumpGravity - 1) * Time.deltaTime * jumpVelocity;
 			myRb.AddForce(new Vector2(0f, JumpForce));
-			sound.PlaySound("Jump");
+			//sound.PlaySound("Jump");
 			
 
 		}
@@ -123,7 +123,7 @@ public class Movement : MonoBehaviour
 
 	public Vector2 noYSpeed; // remove Y speed of player
 
-	Respawn isDead; // Respawn sccript
+	//Respawn isDead; // Respawn sccript
 
 	public GameObject DashParticles; //particles for the dash
 
@@ -147,7 +147,7 @@ public class Movement : MonoBehaviour
 	public void dash(float x, float y)
 	{
 		//make sure the player can dash
-		if (!hasDashed && ! canJump && !isDead.dead)
+		if (!hasDashed && ! canJump /*ss&& !isDead.dead*/)
 		{
 			//Update teh vector2
 			noYSpeed.y = 0; 
