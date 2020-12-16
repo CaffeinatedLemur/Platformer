@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1549904239954495662}
   - component: {fileID: 1549904239954495634}
   - component: {fileID: 8724338198744405561}
+  - component: {fileID: 548304290}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 1549904239954495657}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.5, y: -0.494, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_Children:
   - {fileID: 1549904240400767478}
   m_Father: {fileID: 0}
@@ -125,7 +126,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1.5
-  m_LinearDrag: 0
+  m_LinearDrag: 0.1
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 55b2c8470ee24a345a9177cd2b825958, type: 2}
@@ -146,10 +147,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  jumpForce: 11
+  jumpForce: 12
   groundCheck: {fileID: 1549904240400767478}
   checkRadius: 0.01
-  maxJumps: 2
+  maxJumps: 1
   fallMultiplier: 3
   frontCheck: {fileID: 0}
   wallSlidingSpeed: 0
@@ -166,9 +167,22 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5}
-  m_Size: {x: 1.2, y: 0.1}
+  m_Offset: {x: 0, y: -0.6}
+  m_Size: {x: 1.2, y: 0.3}
   m_Direction: 1
+--- !u!114 &548304290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549904239954495657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed509e12453ca7c499d1729e0307ffee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Respawn: {x: 0, y: 0, z: 0}
 --- !u!1 &1549904240400767473
 GameObject:
   m_ObjectHideFlags: 0

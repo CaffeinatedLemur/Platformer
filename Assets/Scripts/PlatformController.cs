@@ -28,8 +28,6 @@ public class PlatformController : MonoBehaviour
 
     public float fallMultiplier = 2.5f;
 
-    int groundLayer = 1;
-
     bool isTouchingFront;
     public Transform frontCheck;
     bool wallSliding;
