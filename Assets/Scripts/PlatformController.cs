@@ -19,6 +19,8 @@ public class PlatformController : MonoBehaviour
 
     private Rigidbody2D myRB;
     private CapsuleCollider2D myCC;
+    private Animator myAnim;
+
 
     private bool isGrounded;
     public Transform groundCheck;
@@ -33,26 +35,41 @@ public class PlatformController : MonoBehaviour
     bool wallSliding;
     public float wallSlidingSpeed;
 
+
     // Start is called before the first frame update
     void Start()
     {
         myRB = GetComponent<Rigidbody2D>();
         myCC = GetComponent<CapsuleCollider2D>();
+        myAnim = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        isGrounded = true;
+        if (!collision.isTrigger)
+        {
+            isGrounded = true;
+            myAnim.SetBool("isGrounded", true);
+        }   
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        isGrounded = true;
+        if (!collision.isTrigger)
+        {
+            isGrounded = true;
+            myAnim.SetBool("isGrounded", true);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        isGrounded = false;
+        if (!collision.isTrigger)
+        {
+            isGrounded = false;
+            myAnim.SetBool("isGrounded", false);
+        }
+
     }
 
 
@@ -64,13 +81,13 @@ public class PlatformController : MonoBehaviour
             jumps = maxJumps;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && jumps > 0 && isGrounded)
+        if (Input.GetKey(KeyCode.Space) && jumps > 0 && isGrounded)
         {
             myRB.velocity = Vector2.up * jumpForce;
             //myRB.AddForce(new Vector2(0f, jumpForce));
         }
 
-        else if (Input.GetKeyDown(KeyCode.Space) && jumps > 1)
+        else if (Input.GetKey(KeyCode.Space) && jumps > 1)
         {
             myRB.velocity = Vector2.up * jumpForce;
             //myRB.AddForce(new Vector2(0f, jumpForce));
@@ -107,6 +124,16 @@ public class PlatformController : MonoBehaviour
         {
             Flip();
         }
+
+        if (moveInput == 0)
+        {
+            myAnim.SetBool("isWalking", false);
+        }
+        else
+        {
+            myAnim.SetBool("isWalking", true);
+        }
+
     }
 
     private void Flip()

@@ -58,6 +58,18 @@ public class PlayerLogic : MonoBehaviour
         
     }
 
+    /*
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (Input.GetKey(KeyCode.E))
+        {
+            Door D = collision.GetComponent<Door>();
+            if (D != null)
+                SceneManager.LoadScene(D.NextLevel);
+        }
+    }
+    */
+
     void CheckpointManager(Collider2D collision)
     {
         //set new location of new CP
