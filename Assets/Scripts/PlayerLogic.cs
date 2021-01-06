@@ -17,22 +17,43 @@ public class PlayerLogic : MonoBehaviour
     public Color checkInactive = new Color(1, 1, 1, 1);
 
     private GameObject currentCheckpoint;
+    public GameObject key;
 
     bool hasKey;
-    GameObject key;
+
+    public AudioSource audioSource;
+
+    public AudioClip keySound;
+    public AudioClip cpSound;
+    private float audioCooldown = 0.2f;
 
     // Start is called before the first frame update
     void Start()
     {
         Respawn = transform.position;
         hasKey = false;
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        
         if (collision.gameObject.CompareTag("Death"))
         {
             transform.position = Respawn;
+        }
+
+        if (collision.gameObject.CompareTag("moving"))
+        {
+            gameObject.transform.parent = collision.transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("moving"))
+        {
+            gameObject.transform.parent = null;
         }
     }
 
@@ -51,9 +72,9 @@ public class PlayerLogic : MonoBehaviour
         
         if (collision.gameObject.CompareTag("Key"))
         {
-            key = collision.gameObject;
             hasKey = true;
-            Destroy(collision.gameObject);
+            collision.gameObject.transform.parent = gameObject.transform;
+            audioSource.PlayOneShot(keySound);
         }
         
     }
@@ -74,6 +95,11 @@ public class PlayerLogic : MonoBehaviour
     {
         //set new location of new CP
         Respawn = collision.transform.position;
+        if (audioCooldown <= 0 && collision.gameObject.GetComponent<SpriteRenderer>().color == checkInactive)
+        {
+            audioSource.PlayOneShot(cpSound);
+            audioCooldown = 0.2f;
+        }
         if (currentCheckpoint != null)
         {
             currentCheckpoint.GetComponent<SpriteRenderer>().color = checkInactive; //reset old CP's color
@@ -83,11 +109,20 @@ public class PlayerLogic : MonoBehaviour
         {
             currentCheckpoint.GetComponent<SpriteRenderer>().color = checkActive; //set new CP's color
         }
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        audioCooldown -= Time.deltaTime;
+
+        if (hasKey)
+        {
+            key.transform.localPosition = new Vector3(0, 1, 1);
+
+        }
     }
 }
+

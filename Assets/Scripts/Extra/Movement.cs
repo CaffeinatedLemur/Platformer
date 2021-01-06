@@ -19,7 +19,7 @@ public class Movement : MonoBehaviour
 	private bool DirectionFacing = true;  // For determining which way the player is currently facing.
 	private Vector3 velocity = Vector3.zero;
 
-
+	
 	// Sound manager script
 	// SoundPlayonEvent sound;
 	 
@@ -71,6 +71,7 @@ public class Movement : MonoBehaviour
 
 			//myRb.velocity = Vector2.up * Physics2D.gravity.y * (jumpGravity - 1) * Time.deltaTime * jumpVelocity;
 			myRb.AddForce(new Vector2(0f, JumpForce));
+			
 			//sound.PlaySound("Jump");
 			
 

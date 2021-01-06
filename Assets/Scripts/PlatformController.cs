@@ -35,6 +35,8 @@ public class PlatformController : MonoBehaviour
     bool wallSliding;
     public float wallSlidingSpeed;
 
+    public AudioSource jumpAudioSource;
+    public AudioClip jumpSoundEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -81,19 +83,23 @@ public class PlatformController : MonoBehaviour
             jumps = maxJumps;
         }
 
-        if (Input.GetKey(KeyCode.Space) && jumps > 0 && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && jumps > 0 && isGrounded)
         {
+            jumpAudioSource.PlayOneShot(jumpSoundEffect);
             myRB.velocity = Vector2.up * jumpForce;
             //myRB.AddForce(new Vector2(0f, jumpForce));
         }
 
+        /*
         else if (Input.GetKey(KeyCode.Space) && jumps > 1)
         {
+            jumpAudioSource.PlayOneShot(jumpSoundEffect);
             myRB.velocity = Vector2.up * jumpForce;
             //myRB.AddForce(new Vector2(0f, jumpForce));
 
             --jumps;
         }
+        */
 
         if (myRB.velocity.y < 0 || myRB.velocity.y > 1)
         {

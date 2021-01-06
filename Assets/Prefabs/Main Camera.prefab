@@ -97,4 +97,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  smoothVal: 0.5
+  smoothVal: 0.1
