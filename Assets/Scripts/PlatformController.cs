@@ -19,10 +19,8 @@ public class PlatformController : MonoBehaviour
 
     private Rigidbody2D myRB;
     private CapsuleCollider2D myCC;
-    private Animator myAnim;
+    public static Animator myAnim;
 
-
-    private bool isGrounded;
     public Transform groundCheck;
     public float checkRadius;
     private int jumps;
@@ -44,13 +42,15 @@ public class PlatformController : MonoBehaviour
         myRB = GetComponent<Rigidbody2D>();
         myCC = GetComponent<CapsuleCollider2D>();
         myAnim = GetComponent<Animator>();
+    
     }
 
+    /*
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.isTrigger)
         {
-            isGrounded = true;
+            GameManager.isGrounded = true;
             myAnim.SetBool("isGrounded", true);
         }   
     }
@@ -59,7 +59,7 @@ public class PlatformController : MonoBehaviour
     {
         if (!collision.isTrigger)
         {
-            isGrounded = true;
+            GameManager.isGrounded = true;
             myAnim.SetBool("isGrounded", true);
         }
     }
@@ -68,22 +68,23 @@ public class PlatformController : MonoBehaviour
     {
         if (!collision.isTrigger)
         {
-            isGrounded = false;
+            GameManager.isGrounded = false;
             myAnim.SetBool("isGrounded", false);
         }
 
     }
+    */
 
 
     // Update is called once per frame
     void Update()
     {
-        if (isGrounded)
+        if (GameManager.isGrounded)
         {
             jumps = maxJumps;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && jumps > 0 && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && jumps > 0 && GameManager.isGrounded)
         {
             jumpAudioSource.PlayOneShot(jumpSoundEffect);
             myRB.velocity = Vector2.up * jumpForce;

@@ -21,7 +21,7 @@ public class PlayerLogic : MonoBehaviour
 
     bool hasKey;
 
-    public AudioSource audioSource;
+    public static AudioSource audioSource;
 
     public AudioClip keySound;
     public AudioClip cpSound;

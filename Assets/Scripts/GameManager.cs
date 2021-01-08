@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     private static int score = 0;
     public static UnityEvent OnScoreChange = new UnityEvent();
 
+    public static bool isGrounded = false;
+
     //score property (in c# this is a thing)
     public static int Score
     {

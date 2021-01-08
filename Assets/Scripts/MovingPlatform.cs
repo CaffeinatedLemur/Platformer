@@ -8,7 +8,7 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] float negXThreshold;
 
     float dirX;
-    float moveSpeed = 3f;
+    [SerializeField] float moveSpeed = 3f;
 
     bool moveRight = true;
 
